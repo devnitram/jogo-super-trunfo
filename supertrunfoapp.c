@@ -7,9 +7,11 @@ struct Carta
     char codigoDaCarta[4];
     char nomeDaCidade[50];
     int habitantes;
+    int pontoDeTurismo;
     float areaEmKm;
     float pib;
-    int pontoDeTurismo;
+    float densidadePopulacional;
+    float pibPerCapita;
 };
 
 //EXIBE O RESULTADO
@@ -23,6 +25,8 @@ int exibeResultado(struct Carta carta1, struct Carta carta2)
     printf("%s %.2f\n", "Area:", carta1.areaEmKm);
     printf("%s %.2f\n", "PIB:", carta1.pib);
     printf("%s %d\n", "Numero de Pontos Turisticos:", carta1.pontoDeTurismo);
+    printf("%s %.1f\n", "Densidade Populacional:", carta1.densidadePopulacional);
+    printf("%s %.3f\n", "PIB Per Capita:", carta1.pibPerCapita);
 
     printf("\n--> RESULTADO CARD 2 <--\n");
     printf("%s %c\n", "Estado:", carta2.estado);
@@ -32,7 +36,9 @@ int exibeResultado(struct Carta carta1, struct Carta carta2)
     printf("%s %.2f\n", "Area:", carta2.areaEmKm);
     printf("%s %.2f\n", "PIB:", carta2.pib);
     printf("%s %d\n", "Numero de Pontos Turisticos:", carta2.pontoDeTurismo);
-
+    printf("%s %.1f\n", "Densidade Populacional:", carta2.densidadePopulacional);
+    printf("%s %.3f\n", "PIB Per Capita:", carta2.pibPerCapita);
+    
     return 0;
 }
 
@@ -52,7 +58,7 @@ int main()
     scanf("%s", carta1.codigoDaCarta);
 
     printf("Qual o nome da cidade: ");
-    scanf("%s", carta1.nomeDaCidade);
+    scanf(" %[^\n]", carta1.nomeDaCidade);
 
     printf("Quantidade de habitantes: ");
     scanf("%d", &carta1.habitantes);
@@ -76,7 +82,7 @@ int main()
     scanf("%s", carta2.codigoDaCarta);
 
     printf("Qual o nome da cidade: ");
-    scanf("%s", carta2.nomeDaCidade);
+    scanf(" %[^\n]", carta2.nomeDaCidade);
 
     printf("Quantidade de habitantes: ");
     scanf("%d", &carta2.habitantes);
@@ -90,7 +96,14 @@ int main()
     printf("Quantos pontos turisticos: ");
     scanf("%d", &carta2.pontoDeTurismo);
 
+    //CALCULOS
+    carta1.densidadePopulacional = carta1.habitantes / carta1.areaEmKm;
+    carta1.pibPerCapita = carta1.pib / carta1.habitantes;
+
+    carta2.densidadePopulacional = carta2.habitantes / carta2.areaEmKm;
+    carta2.pibPerCapita = carta2.pib / carta2.habitantes;
+    //fim calculos
+
     exibeResultado(carta1, carta2);
-    
     return 0;
 }
