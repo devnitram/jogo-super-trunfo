@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <windows.h>
 
 // ESTRUTURA DAS VARIAVEIS
 struct Carta
@@ -110,6 +111,86 @@ void verificarVencedor(struct Carta carta1, struct Carta carta2)
         printf("\n\n-> EMPATE ENTRE AS CARTAS! <-\n\n");
 }
 
+//COMPARAÇÃO DAS CARTAS
+void compararCartasOpcao(struct Carta carta1, struct Carta carta2) {
+    int opcao;
+    
+    printf("\n==> ESCOLHA UM ATRIBUTO PARA COMPARAR:\n");
+    printf("1. Populacao\n");
+    printf("2. Area\n");
+    printf("3. PIB\n");
+    printf("4. Pontos Turisticos\n");
+    printf("5. Densidade Demografica\n");
+    printf("Escolha: ");
+    scanf("%d", &opcao);
+
+    printf("Comparando as cidades: %s vs %s\n", carta1.nomeDaCidade, carta2.nomeDaCidade);
+
+    Sleep(1500);
+
+    switch (opcao)
+    {
+    case 1:
+        printf("Habitantes: %lu vs %lu\n", carta1.habitantes, carta2.habitantes);
+        if(carta1.habitantes > carta2.habitantes) {
+            printf("->%s venceu!\n", carta1.nomeDaCidade);
+        } else if (carta1.habitantes < carta2.habitantes) {
+            printf("->%s venceu!\n", carta2.nomeDaCidade);
+        } else {
+            printf("-> Empate!\n");
+        }
+        break;
+        Sleep(1200);                                                                                       
+    case 2:
+        printf("Area: %.2f vs %.2f\n", carta1.areaEmKm, carta2.areaEmKm);
+        if(carta1.areaEmKm > carta2.areaEmKm) {
+            printf("->%s venceu!\n", carta1.nomeDaCidade);
+        } else if (carta1.areaEmKm < carta2.areaEmKm) {
+            printf("->%s venceu!\n", carta2.nomeDaCidade);
+        } else {
+            printf("-> Empate!\n");
+        }
+        break;
+        Sleep(1200); 
+    case 3:
+        printf("PIB: %.2f vs %.2f\n", carta1.pib, carta2.pib);
+        if(carta1.pib > carta2.pib) {
+            printf("->%s venceu!\n", carta1.nomeDaCidade);
+        } else if (carta1.pib < carta2.pib) {
+            printf("->%s venceu!", carta2.nomeDaCidade);
+        } else {
+            printf("-> Empate!\n");
+        }
+        break;
+        Sleep(1200); 
+    case 4:
+        printf("Pontos Turisticos: %d vs %d\n", carta1.pontoDeTurismo, carta2.pontoDeTurismo);
+        if(carta1.pontoDeTurismo > carta2.pontoDeTurismo) {
+            printf("%s venceu!\n", carta1.nomeDaCidade);
+        } else if (carta1.pontoDeTurismo < carta2.pontoDeTurismo) {
+            printf("%s venceu!", carta2.nomeDaCidade);
+        } else {
+            printf("-> Empate!\n");
+        }
+        break;
+        Sleep(1200); 
+    case 5:
+        printf("Densidade Populacional: %.2f vs %.2f\n", carta1.densidadePopulacional, carta2.densidadePopulacional);
+        if(carta1.densidadePopulacional < carta2.densidadePopulacional) {
+            printf("%s venceu! (menor densidade vence)\n", carta1.nomeDaCidade);
+        } else if (carta1.densidadePopulacional > carta2.densidadePopulacional) {
+            printf("%s venceu! (menor densidade vence)\n", carta2.nomeDaCidade);
+        } else {
+            printf("-> Empate!\n");
+        }
+        break;
+        Sleep(1200); 
+    default:
+        printf("Opcao invalida. Nenhuma comparacao realizada.\n");
+        break;
+    }
+}
+
 // CONTEUDO PRINCIPAL
 int main()
 {
@@ -189,6 +270,8 @@ int main()
     exibeResultado(carta1, carta2);
     compararCartas(carta1, carta2);
     verificarVencedor(carta1, carta2);
+    Sleep(2000);
+    compararCartasOpcao(carta1, carta2);
 
     return 0;
 }
